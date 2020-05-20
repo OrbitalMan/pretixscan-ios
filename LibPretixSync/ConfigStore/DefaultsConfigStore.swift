@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Sentry
+//import Sentry
 
 /// ConfigStore implementation that stores configuration in UserDefaults.
 ///
@@ -148,7 +148,7 @@ public class DefaultsConfigStore: ConfigStore {
         self.event = event
         self.checkInList = checkInList
 
-        Client.shared?.tags = ["event": event.slug, "checkInList": "\(checkInList.identifier)"]
+        // Client.shared?.tags = ["event": event.slug, "checkInList": "\(checkInList.identifier)"]
     }
 
     /// All Events that are synced into a local database
