@@ -185,7 +185,7 @@
 		B5F790E4765735A333845AC8 /* Pods-pretixSCAN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pretixSCAN.debug.xcconfig"; path = "Target Support Files/Pods-pretixSCAN/Pods-pretixSCAN.debug.xcconfig"; sourceTree = "<group>"; };
 		DC0052E7225FB02B002D985B /* FMDBDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDBDataStore.swift; sourceTree = "<group>"; };
 		DC0052E92260D385002D985B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		DC07357622392474008326F7 /* pretixSCAN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pretixSCAN.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC07357622392474008326F7 /* pretixClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pretixClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC07357922392474008326F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC07357E22392474008326F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC07358022392476008326F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -352,20 +352,20 @@
 		DC07356D22392474008326F7 = {
 			isa = PBXGroup;
 			children = (
-				DCAAFF28223929B60059C000 /* README.md */,
-				DCEF6E31223924F2009E7078 /* LibPretixSync */,
 				DC07357822392474008326F7 /* pretixSCAN */,
+				DCEF6E31223924F2009E7078 /* LibPretixSync */,
 				DC07358D22392476008326F7 /* PretixScanTests */,
 				DC07357722392474008326F7 /* Products */,
 				A6C5D16AFBC1EE32D87B8211 /* Pods */,
 				EC2132A7F9D83BF80D49289C /* Frameworks */,
+				DCAAFF28223929B60059C000 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
 		DC07357722392474008326F7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DC07357622392474008326F7 /* pretixSCAN.app */,
+				DC07357622392474008326F7 /* pretixClone.app */,
 				DC07358A22392476008326F7 /* PretixScanTests.xctest */,
 			);
 			name = Products;
@@ -712,7 +712,7 @@
 			);
 			name = pretixSCAN;
 			productName = PretixScan;
-			productReference = DC07357622392474008326F7 /* pretixSCAN.app */;
+			productReference = DC07357622392474008326F7 /* pretixClone.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DC07358922392476008326F7 /* PretixScanTests */ = {
@@ -1224,16 +1224,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
-				DEVELOPMENT_TEAM = 6U994M44MG;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = M4S8722GB9;
 				INFOPLIST_FILE = PretixScan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
-				PRODUCT_BUNDLE_IDENTIFIER = eu.pretix.pretixscan.ios;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				MARKETING_VERSION = 1.4.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gssofwarehouse.pretixscanclone.ios.develop;
+				PRODUCT_NAME = pretixClone;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1245,16 +1245,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
-				DEVELOPMENT_TEAM = 6U994M44MG;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = M4S8722GB9;
 				INFOPLIST_FILE = PretixScan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
-				PRODUCT_BUNDLE_IDENTIFIER = eu.pretix.pretixscan.ios;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				MARKETING_VERSION = 1.4.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gssofwarehouse.pretixscanclone.ios.develop;
+				PRODUCT_NAME = pretixClone;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
