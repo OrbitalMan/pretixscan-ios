@@ -35,6 +35,9 @@ public struct RedemptionResponse: Codable, Equatable {
     /// can be pre-filled in the UI, allowing the user to only answer the missing ones. 
     public var answers: [Answer]?
 
+    // TODO: placeholder
+    var message = ""
+    
     // MARK: - Enums
     /// Possible values for the Response Status
     public enum Status: String, Codable {
@@ -73,4 +76,37 @@ public struct RedemptionResponse: Codable, Equatable {
         case lastCheckIn
         case questions
     }
+}
+
+struct GrafschaftResponse: Codable {
+    
+    let status: String
+    let message: String
+    
+    var redemptionResponse: RedemptionResponse {
+        let redemptionStatus: RedemptionResponse.Status
+        let errorReason: RedemptionResponse.ErrorReason?
+        switch status {
+        case "valid":
+            redemptionStatus = .redeemed
+            errorReason = nil
+        default:
+            redemptionStatus = .error
+            if  message.lowercased().contains("ticket allready scanned") ||
+                message.lowercased().contains("ticket already scanned")
+            {
+                errorReason = .alreadyRedeemed
+            } else {
+                errorReason = .unpaid
+            }
+        }
+        return RedemptionResponse(status: redemptionStatus,
+                                  errorReason: errorReason,
+                                  position: nil,
+                                  lastCheckIn: nil,
+                                  questions: nil,
+                                  answers: nil,
+                                  message: message)
+    }
+    
 }

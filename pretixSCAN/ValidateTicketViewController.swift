@@ -72,12 +72,17 @@ extension ValidateTicketViewController {
         }
 
         // API Connection
-        else if configStore.apiToken == nil {
-            performSegue(withIdentifier: Segue.presentConnectDeviceViewController, sender: self)
-        }
+            //else if configStore.apiToken == nil {
+            //    performSegue(withIdentifier: Segue.presentConnectDeviceViewController, sender: self)
+            //}
 
         // Begin Scanning
         else {
+            
+            // TODO: placeholder
+            var configStore = configStore
+                configStore.apiToken = "token"
+            
             ticketScannerViewController.shouldScan = true
             configStore.syncManager.beginSyncingIfAutoSync()
         }

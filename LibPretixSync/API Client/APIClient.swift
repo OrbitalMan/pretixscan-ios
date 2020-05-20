@@ -372,38 +372,63 @@ public extension APIClient {
     }
 
     /// Create a paused task to check in an attendee, identified by their secret code, into the currently configured CheckInList
-    func redeemTask(secret: String, redemptionRequest: RedemptionRequest, eventSlug: String? = nil,
+    func redeemTask(secret: String,
+                    redemptionRequest: RedemptionRequest,
+                    eventSlug: String? = nil,
                     checkInListIdentifier: Identifier? = nil,
                     completionHandler: @escaping (RedemptionResponse?, Error?) -> Void) -> URLSessionDataTask? {
-        do {
-            let organizer = try getOrganizerSlug()
-            let event = try getEvent()
-            let checkInList = try getCheckInList()
-            let urlPath = try createURL(for: "/api/v1/organizers/\(organizer)/events/\(eventSlug ?? event.slug)" +
-                "/checkinlists/\(checkInListIdentifier ?? checkInList.identifier)/positions/\(secret)/redeem/")
-            var urlRequest = try createURLRequest(for: urlPath)
-            urlRequest.httpMethod = HttpMethod.POST
-            urlRequest.httpBody = try jsonEncoder.encode(redemptionRequest)
-
-            let task = session.dataTask(with: urlRequest) { (data, response, error) in
-                if let error = self.checkResponse(data: data, response: response, error: error) {
-                    completionHandler(nil, error)
-                    return
-                }
-
-                do {
-                    let redemptionResponse = try self.jsonDecoder.decode(RedemptionResponse.self, from: data!)
-                    completionHandler(redemptionResponse, nil)
-                } catch let jsonError {
-                    completionHandler(nil, jsonError)
-                    return
-                }
+        let url = URL(string: "https://tickets.bnn-grafschaft.de/restapi/?scancode=\(secret)")!
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = HttpMethod.GET
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        
+        let task = session.dataTask(with: urlRequest) { (data, response, error) in
+            if let error = self.checkResponse(data: data, response: response, error: error) {
+                completionHandler(nil, error)
+                return
             }
-            return task
-        } catch {
-            completionHandler(nil, error)
-            return nil
+            
+            do {
+                let grafschaftResponse = try self.jsonDecoder.decode(GrafschaftResponse.self, from: data!)
+                let redemptionResponse = grafschaftResponse.redemptionResponse
+                // let redemptionResponse = try self.jsonDecoder.decode(RedemptionResponse.self, from: data!)
+                completionHandler(redemptionResponse, nil)
+            } catch let jsonError {
+                completionHandler(nil, jsonError)
+                return
+            }
         }
+        return task
+        //do {
+        //    let organizer = try getOrganizerSlug()
+        //    let event = try getEvent()
+        //    let checkInList = try getCheckInList()
+        //    let urlPath = try createURL(for: "/api/v1/organizers/\(organizer)/events/\(eventSlug ?? event.slug)" +
+        //        "/checkinlists/\(checkInListIdentifier ?? checkInList.identifier)/positions/\(secret)/redeem/")
+        //    var urlRequest = try createURLRequest(for: urlPath)
+        //    urlRequest.httpMethod = HttpMethod.POST
+        //    urlRequest.httpBody = try jsonEncoder.encode(redemptionRequest)
+        //
+        //    let task = session.dataTask(with: urlRequest) { (data, response, error) in
+        //        if let error = self.checkResponse(data: data, response: response, error: error) {
+        //            completionHandler(nil, error)
+        //            return
+        //        }
+        //
+        //        do {
+        //            let redemptionResponse = try self.jsonDecoder.decode(RedemptionResponse.self, from: data!)
+        //            completionHandler(redemptionResponse, nil)
+        //        } catch let jsonError {
+        //            completionHandler(nil, jsonError)
+        //            return
+        //        }
+        //    }
+        //    return task
+        //} catch {
+        //    completionHandler(nil, error)
+        //    return nil
+        //}
     }
 
     /// Get Status information for the current CheckInList

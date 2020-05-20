@@ -125,6 +125,10 @@ class TicketStatusViewController: UIViewController, Configurable, AppCoordinator
         case .error:
             newBackgroundColor = updateToError(redemptionResponse)
         }
+        
+        // TODO: placeholder
+        orderIDLabel.text = redemptionResponse.message
+        
 
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
             self.backgroundColorView.backgroundColor = newBackgroundColor
